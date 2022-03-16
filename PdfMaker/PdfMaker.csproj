@@ -50,7 +50,7 @@
   <ItemGroup>
     <Compile Include="BatchPdfMaker.cs" />
     <Compile Include="PdfMaker.cs" />
-    <Compile Include="PdfPageTrimmer.cs" />
+    <Compile Include="PdfUtils.cs" />
     <Compile Include="TempDirectory.cs" />
     <Compile Include="ExcleToPdf.cs" />
     <Compile Include="IPdfMaker.cs" />

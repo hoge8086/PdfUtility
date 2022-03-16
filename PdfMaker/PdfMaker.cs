@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
+// TODO:名前をPDFのユーティリティーっぽくする
 namespace PdfMaker
 {
     /// <summary>
@@ -41,7 +42,7 @@ namespace PdfMaker
             {
                 string fileName = Path.GetFileNameWithoutExtension(pdfPath);
                 string trimedPdfPath = Path.Combine(tempDir.Path, fileName + ".trim.pdf");
-                PdfPageTrimmer.TrimByKeyword(pdfPath, trimedPdfPath, keywords);
+                PdfUtils.TrimPageIfNotContainsKeywords(pdfPath, trimedPdfPath, keywords);
 
                 //System.Threading.Thread.Sleep(100);
                 File.Delete(pdfPath);

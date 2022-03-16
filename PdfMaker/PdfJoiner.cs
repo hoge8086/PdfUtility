@@ -8,6 +8,7 @@ using iTextSharp.text.pdf;
 
 namespace PdfMaker
 {
+    // TODO:PDFのユーティリティ―クラスに入れる
     public class PdfJoiner
     {
         List<string> pdfPaths = new List<string>();
