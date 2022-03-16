@@ -7,5 +7,13 @@
         xmlns:plugin="clr-namespace:MakePdfPlugin;assembly=MakePdfPlugin"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <plugin:MakePdfPanel/>
+    <TabControl>
+        <TabItem Header="PDF化">
+            <plugin:MakePdfPanel/>
+        </TabItem>
+        <TabItem Header="PDF検索">
+            <plugin:PdfSearchPanel/>
+        </TabItem>
+        
+    </TabControl>
 </Window>

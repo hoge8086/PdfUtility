@@ -29,6 +29,14 @@ namespace PdfMaker
         public bool IgnoreCase;
         public List<SearchHit> Hits;
 
+        public SearchTarget(string keword, bool enableRegexp, bool ignoreCase)
+        {
+            Keword = keword;
+            EnableRegexp = enableRegexp;
+            IgnoreCase = ignoreCase;
+            Hits = new List<SearchHit>();
+        }
+
         public string RegexpKeword {
             get
             {
@@ -94,6 +102,13 @@ namespace PdfMaker
             return pageIndex.Keys.Where(page => keywords.Any(k => (pageIndex[page].IndexOf(k, StringComparison.OrdinalIgnoreCase) != -1))).ToList();
         }
 
+        static public int GetPageNum(string pdfPath)
+        {
+            using (var pdfReader = new PdfReader(pdfPath))
+            {
+                return pdfReader.NumberOfPages;
+            }
+        }
         static private Dictionary<int, string> CreatePageIndex(string pdfPath)
         {
             var index = new Dictionary<int, string>();
@@ -101,7 +116,8 @@ namespace PdfMaker
             {
                 for (int page = 1; page <= pdfReader.NumberOfPages; page++)
                 {
-                    ITextExtractionStrategy strategy = new SimpleTextExtractionStrategy();
+                    //ITextExtractionStrategy strategy = new SimpleTextExtractionStrategy();
+                    ITextExtractionStrategy strategy = new JapaneseTextExtractionStrategy();
 
                     string currentPageText = PdfTextExtractor.GetTextFromPage(pdfReader, page, strategy);
                     index.Add(page, currentPageText);
@@ -116,6 +132,9 @@ namespace PdfMaker
         {
             foreach(var target in searchTargets)
             {
+                if (string.IsNullOrEmpty(target.Keword))
+                    continue;
+
                 target.Hits = new List<SearchHit>();
                 foreach(var page in pageIndex.Keys)
                 {
@@ -132,6 +151,14 @@ namespace PdfMaker
         {
             var index = CreatePageIndex(pdfPath);
             Search(searchTargets, index);
+        }
+    }
+
+    //http://blog.nsmr.me/2015/02/itextpdfpdf.html
+    class JapaneseTextExtractionStrategy : LocationTextExtractionStrategy {
+        protected override bool IsChunkAtWordBoundary(TextChunk chunk, TextChunk previousChunk)
+        {
+            return chunk.DistanceFromEndOf(previousChunk) > 10;
         }
     }
 }
