@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="MakePdfPlugin.MakePdfPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MakePdfPlugin"
+             xmlns:dd="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Excel、Word、PDFファイルをドラッグ＆ドロップしてください." Margin="5,5,5,0"/>
+        <DataGrid Grid.Row="1" AutoGenerateColumns="False" Margin="5,5,5,0" Name="dataGrid1"
+                  ItemsSource="{Binding Path=FilePaths}"
+                  dd:DragDrop.IsDropTarget="True"
+                  dd:DragDrop.DropHandler="{Binding}"
+                  AlternationCount="2"
+                  AlternatingRowBackground="AliceBlue"
+                  GridLinesVisibility="Vertical"
+                  VerticalGridLinesBrush="LightGray">
+                  <!--:DragDrop.IsDragSource="True"-->
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=FileName, Mode=OneWay}"
+                    CanUserReorder="True" CanUserResize="True" IsReadOnly="False"
+                    CanUserSort="True" Header="ファイル名" Width="Auto" />
+                <DataGridTextColumn Binding="{Binding Path=DirectoryPath, Mode=OneWay}"
+                    CanUserReorder="True" CanUserResize="True" IsReadOnly="False"
+                    CanUserSort="True" Header="ディレクトリパス" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid Grid.Row="2" AutoGenerateColumns="False" Margin="5,5,5,0" 
+                  ItemsSource="{Binding Path=Keywords}"
+                  HorizontalGridLinesBrush="LightGray">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Word, Mode=TwoWay}"
+                    CanUserReorder="True" CanUserResize="True" IsReadOnly="False"
+                    CanUserSort="True" Header="抽出キーワード" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <CheckBox Grid.Row="3" Name="chekBoxMergePdf" Content="PDFをひとつのファイルにまとめる." Margin="5,5,0,0" IsChecked="{Binding MergePdf}"/>
+        <DockPanel Grid.Row="4" LastChildFill="True">
+            <Label Content="ファイル名:" Margin="5,5,0,0" IsEnabled="{Binding ElementName=chekBoxMergePdf, Path=IsChecked}" />
+            <TextBox Height="20" Margin="5,5,5,0" IsEnabled="{Binding ElementName=chekBoxMergePdf, Path=IsChecked}" Text="{Binding MergedPdfName}"/>
+        </DockPanel>
+        <Button Grid.Row="5" Content="出力" Margin="5,5,5,0" Command="{Binding MakePdfCmd}"/>
+        <Expander Grid.Row="6" Header="PDFがバラバラなサイズで出力される場合は..." Margin="5,5,5,10" FontSize="10.5">
+            <StackPanel>
+                <TextBlock Text="プリンタの設定で通常使うプリンタを[Microsoft Print to PDF]に設定してください." Margin="0,0,0,0"/>
+                <Button Content="プリンタの設定" Margin="0,5,0,0" Command="{Binding OpenPrinterAndDeviceCmd}"/>
+            </StackPanel>
+        </Expander>
+    </Grid>
+</UserControl>
