@@ -1,7 +1,7 @@
-﻿<Application x:Class="PdfUtilityTools.App"
+﻿<Application x:Class="PdfUtility.Tools.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:PdfUtilityTools"
+             xmlns:local="clr-namespace:PdfUtility.Tools"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          

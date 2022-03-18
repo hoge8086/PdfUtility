@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 
 
-namespace PdfUtilityTools.Properties
+namespace PdfUtility.Tools.Properties
 {
     /// <summary>
     ///   ローカライズされた文字列などを検索するための、厳密に型指定されたリソース クラスです。
@@ -43,7 +43,7 @@ namespace PdfUtilityTools.Properties
             {
                 if ((resourceMan == null))
                 {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PdfUtilityTools.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PdfUtility.Tools.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
