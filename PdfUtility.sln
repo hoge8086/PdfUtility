@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfUtility", "PdfUtility\PdfUtility.csproj", "{AF83B443-D379-49B8-B097-4F3A00A4AC87}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakePdfPlugin", "MakePdfPlugin\MakePdfPlugin.csproj", "{05EAECE5-EE27-4FF9-BE71-AF9D66906484}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfMaker", "PdfMaker\PdfMaker.csproj", "{D8A27EE1-671A-4A40-B3AE-C8395F8E7950}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfUtilityTools", "PdfUtilityTools\PdfUtilityTools.csproj", "{D883D1AB-019A-48C5-8875-4CC40FDDC5BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AF83B443-D379-49B8-B097-4F3A00A4AC87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AF83B443-D379-49B8-B097-4F3A00A4AC87}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AF83B443-D379-49B8-B097-4F3A00A4AC87}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AF83B443-D379-49B8-B097-4F3A00A4AC87}.Release|Any CPU.Build.0 = Release|Any CPU
 		{05EAECE5-EE27-4FF9-BE71-AF9D66906484}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{05EAECE5-EE27-4FF9-BE71-AF9D66906484}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05EAECE5-EE27-4FF9-BE71-AF9D66906484}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,6 +23,10 @@ Global
 		{D8A27EE1-671A-4A40-B3AE-C8395F8E7950}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D8A27EE1-671A-4A40-B3AE-C8395F8E7950}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D8A27EE1-671A-4A40-B3AE-C8395F8E7950}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D883D1AB-019A-48C5-8875-4CC40FDDC5BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D883D1AB-019A-48C5-8875-4CC40FDDC5BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D883D1AB-019A-48C5-8875-4CC40FDDC5BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D883D1AB-019A-48C5-8875-4CC40FDDC5BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
