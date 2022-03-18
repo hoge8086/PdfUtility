@@ -11,7 +11,7 @@
         <TabItem Header="PDF化">
             <plugin:MakePdfPanel/>
         </TabItem>
-        <TabItem Header="PDF検索">
+        <TabItem Header="ページ単位検索">
             <plugin:PdfSearchPanel/>
         </TabItem>
         
