@@ -5,7 +5,7 @@ using System.Text;
 using System.IO;
 
 // TODO:名前をPDFのユーティリティーっぽくする
-namespace PdfMaker
+namespace PdfUtility
 {
     /// <summary>
     /// [Window不具合]

@@ -6,7 +6,7 @@ using System.IO;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 
-namespace PdfMaker
+namespace PdfUtility
 {
     // TODO:PDFのユーティリティ―クラスに入れる
     public class PdfJoiner

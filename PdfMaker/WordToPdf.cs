@@ -7,7 +7,7 @@ using Microsoft.Office.Interop.Word;
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace PdfMaker
+namespace PdfUtility
 {
     public class WordToPdf : IPdfMaker
     {

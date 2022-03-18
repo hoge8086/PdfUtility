@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BatchPdfMaker.cs" />
+    <Compile Include="JapaneseTextExtractionStrategy.cs" />
     <Compile Include="PdfMaker.cs" />
     <Compile Include="PdfUtils.cs" />
     <Compile Include="TempDirectory.cs" />

@@ -10,7 +10,7 @@ using System.Windows;
 using System.ComponentModel;
 using System.Windows.Input;
 using System.Windows.Data;
-using PdfMaker;
+using PdfUtility;
 
 namespace MakePdfPlugin
 {

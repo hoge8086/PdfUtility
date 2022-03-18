@@ -8,45 +8,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PdfUtility
+namespace PdfUtility.Infrastructure
 {
-    public class Page
-    {
-        public int PageNumber;
-        public string BodyText;
-
-        public Page(int pageNumber, string bodyText)
-        {
-            PageNumber = pageNumber;
-            BodyText = bodyText;
-        }
-    }
-
-    public class PdfPages
-    {
-        public List<Page> Pages;
-
-        public int NumberOfPages => Pages.Count();
-
-        public PdfPages(List<Page> pages)
-        {
-            Pages = pages;
-        }
-
-    }
-
-    public class PdfService
+    public class PdfService : IPdfService
     {
         public void Join(List<string> srcPdfPathList, string destPdfPath)
         {
             Document objITextDoc = null;
-            PdfCopy  objPDFCopy  = null;
+            PdfCopy objPDFCopy = null;
 
             try
             {
 
                 objITextDoc = new Document();
-                objPDFCopy  = new PdfCopy( objITextDoc, new FileStream(destPdfPath, FileMode.Create ) );
+                objPDFCopy = new PdfCopy(objITextDoc, new FileStream(destPdfPath, FileMode.Create));
 
                 objITextDoc.Open();
 
@@ -68,16 +43,16 @@ namespace PdfUtility
                     objPdfReader.Close();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception("pdfの結合に失敗しました.\n" + ex.Message);
             }
             finally
             {
-                if(objITextDoc != null)
+                if (objITextDoc != null)
                     objITextDoc.Close();
 
-                if(objPDFCopy != null)
+                if (objPDFCopy != null)
                     objPDFCopy.Close();
             }
         }

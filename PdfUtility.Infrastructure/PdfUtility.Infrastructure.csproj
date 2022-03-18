@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{01C5F0B8-6C2C-4082-BF0B-81C5DBB07C53}</ProjectGuid>
+    <ProjectGuid>{0AC414E4-10A3-4C7E-A1BE-7322F523583B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PdfUtility</RootNamespace>
-    <AssemblyName>PdfUtility</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>PdfUtility.Infrastructure</RootNamespace>
+    <AssemblyName>PdfUtility.Infrastructure</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -54,6 +55,7 @@
   <ItemGroup>
     <Compile Include="ExcleToPdf.cs" />
     <Compile Include="IPdfConverter.cs" />
+    <Compile Include="IPdfService.cs" />
     <Compile Include="JapaneseTextExtractionStrategy.cs" />
     <Compile Include="PdfService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

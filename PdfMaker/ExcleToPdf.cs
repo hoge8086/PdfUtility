@@ -7,7 +7,7 @@ using Microsoft.Office.Interop.Excel;
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace PdfMaker
+namespace PdfUtility
 {
     public class ExcelToPdf : IPdfMaker
     {

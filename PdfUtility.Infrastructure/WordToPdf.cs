@@ -7,7 +7,7 @@ using Microsoft.Office.Interop.Word;
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace PdfUtility
+namespace PdfUtility.Infrastructure
 {
     class WordToPdf : IPdfConverter
     {

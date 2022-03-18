@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace PdfMaker
+namespace PdfUtility
 {
     public class TempDirectory
     {

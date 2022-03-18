@@ -6,7 +6,7 @@ using System.Text;
 using System.IO;
 using System.Reflection;
 
-namespace PdfMaker
+namespace PdfUtility
 {
     public class BatchPdfMaker
 
