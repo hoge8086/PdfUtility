@@ -27,6 +27,7 @@
                   CanUserAddRows="False"
                   CanUserDeleteRows="False"
                   ItemsSource="{Binding Path=Keywords}"
+                  VerticalGridLinesBrush="LightGray"
                   HorizontalGridLinesBrush="LightGray">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Number, Mode=TwoWay}"
@@ -54,6 +55,7 @@
                   AlternationCount="2"
                   AlternatingRowBackground="AliceBlue"
                   GridLinesVisibility="Vertical"
+                  HorizontalGridLinesBrush="LightGray"
                   VerticalGridLinesBrush="LightGray">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Path=Page, Mode=OneWay}"

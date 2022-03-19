@@ -59,6 +59,7 @@
         </DataGrid>
         <DataGrid Grid.Row="2" AutoGenerateColumns="False" Margin="5,5,5,0" 
                   ItemsSource="{Binding Path=Keywords}"
+                  VerticalGridLinesBrush="LightGray"
                   HorizontalGridLinesBrush="LightGray">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Word, Mode=TwoWay}"

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PdfUtility.Tools"
         xmlns:plugin="clr-namespace:MakePdfPlugin;assembly=MakePdfPlugin"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="PDF便利ツール" Height="350" Width="525">
     <TabControl>
         <TabItem Header="PDF化">
             <plugin:MakePdfPanel/>
