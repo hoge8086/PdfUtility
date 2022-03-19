@@ -24,8 +24,8 @@ namespace MakePdfPlugin
         public ObservableCollection<TargetPath> FilePaths { get; }
         public bool MergePdf { get; set; }
         public string MergedPdfName { get; set; }
-        public ReactiveCommand MakePdfCmd { get; set; }
-        public ReactiveCommand OpenPrinterAndDeviceCmd { get; set; }
+        public AsyncReactiveCommand  MakePdfCmd { get; set; }
+        public ReactiveCommand  OpenPrinterAndDeviceCmd { get; set; }
 
         private string outputDirectoryPath;
         private string tempDirectoryPath;
@@ -36,25 +36,34 @@ namespace MakePdfPlugin
         {
             FilePaths = new ObservableCollection<TargetPath>();
             Keywords = new ObservableCollection<Keyword>();
-            MakePdfCmd = new ReactiveCommand();
-            MakePdfCmd.Subscribe(() =>
+            MakePdfCmd = new AsyncReactiveCommand ();
+            MakePdfCmd.Subscribe(async () =>
             {
                 try
                 {
                     var createPdfService = new CreatePdfService(tempDirectoryPath);
-                    var paths = CollectionViewSource.GetDefaultView(FilePaths).Cast<TargetPath>().Select(f => f.FilePath).ToList();
+                    var srcFiles = CollectionViewSource.GetDefaultView(FilePaths).Cast<TargetPath>();
                     var keywords = Keywords.Where(x => x.Word != "").Select(x => x.Word).ToList();
-                    createPdfService.CreatePdf(paths.Select(x => new CreatePdfTarget(x, "", true)).ToList(), keywords, outputDirectoryPath, MergePdf ? MergedPdfName : null);
-                    MessageBox.Show("完了!");
+                    if (MergePdf && string.IsNullOrEmpty(MergedPdfName))
+                        throw new Exception("結合PDFのファイル名が空です。");
+
+                    await Task.Run(() =>
+                    {
+                        createPdfService.CreatePdf(
+                                srcFiles.Select(x => new CreatePdfTarget(x.FilePath, x.ExtractPages, x.ContainingKeywordPage)).ToList(),
+                                keywords,
+                                outputDirectoryPath, MergePdf ? MergedPdfName : null);
+                    });
+                    MessageBox.Show("完了しました。出力フォルダを開きます。", "完了");
                     System.Diagnostics.Process.Start(outputDirectoryPath);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("エラー:\n" + ex.Message);
+                    MessageBox.Show(ex.Message, "エラー");
                 }
             });
 
-            OpenPrinterAndDeviceCmd = new ReactiveCommand();
+            OpenPrinterAndDeviceCmd = new ReactiveCommand ();
             OpenPrinterAndDeviceCmd.Subscribe(() =>
             {
                 System.Diagnostics.Process.Start("control.exe", "/name Microsoft.DevicesAndPrinters");
@@ -109,6 +118,9 @@ namespace MakePdfPlugin
         public string FilePath { get; }
         public string DirectoryPath { get { return Path.GetDirectoryName(FilePath); } }
         public string FileName { get { return Path.GetFileName(FilePath); } }
+
+        public string ExtractPages { get; set; } = "";
+        public bool ContainingKeywordPage { get; set; } = true; 
         public TargetPath(string path) { this.FilePath = path; }
     }
 }

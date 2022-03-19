@@ -1,22 +1,26 @@
 ﻿using PdfUtility.Infrastructure;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Collections;
+using System;
 
 namespace PdfUtility.Business
 {
     public class CreatePdfTarget
     {
         public string Path;
-        public List<int> ExtractPageNumbers;
+        public List<NumberRange> ExtractPageNumbers;
         public bool ExtractContainingKeywordPage;
 
         public CreatePdfTarget(string path, string pageNumbers, bool extractContainingKeywordPage)
         {
             Path = path;
-            ExtractPageNumbers = null;
+            if(string.IsNullOrEmpty(pageNumbers))
+                ExtractPageNumbers = null;
+            else
+                ExtractPageNumbers = pageNumbers.Split(',').Select(x => NumberRange.Parse( x.Trim())).ToList();
+
             ExtractContainingKeywordPage = extractContainingKeywordPage;
         }
     }
@@ -45,6 +49,9 @@ namespace PdfUtility.Business
         }
         public void CreatePdf(List<CreatePdfTarget> createTargets, List<string> keywords, string OutputDirectory,  string MargeFileName)
         {
+            if (createTargets.Count < 1)
+                throw new ArgumentException("PDF化対象のファイルがありません。");
+
             if (MargeFileName != null && !FileUtility.IsExtension(MargeFileName, PdfExtension))
                 MargeFileName += PdfExtension;
 
@@ -101,7 +108,10 @@ namespace PdfUtility.Business
             if(file.Target.ExtractPageNumbers != null && file.Target.ExtractPageNumbers.Count > 0)
             {
                 var outPath = Path.ChangeExtension(file.CurrentPath, ".page");
-                pdfService.ExtractPages(file.Target.ExtractPageNumbers, file.CurrentPath, outPath);
+                var pageNum = pdfService.GetPages(file.CurrentPath).NumberOfPages;
+                var extractPages = file.Target.ExtractPageNumbers.SelectMany(x => x.GetNumberList(pageNum)).Distinct().ToList();
+                extractPages.Sort();
+                pdfService.ExtractPages(extractPages, file.CurrentPath, outPath);
                 file.CurrentPath = outPath;
             }
             return file;

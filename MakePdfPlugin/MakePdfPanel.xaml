@@ -34,6 +34,27 @@
                 <DataGridTextColumn Binding="{Binding Path=DirectoryPath, Mode=OneWay}"
                     CanUserReorder="True" CanUserResize="True" IsReadOnly="False"
                     CanUserSort="True" Header="ディレクトリパス" Width="*" />
+                <DataGridTemplateColumn IsReadOnly="False" Header="ページ指定（!）" >
+                    <DataGridTemplateColumn.HeaderStyle>
+                      <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="ToolTip"
+                                Value="プリンタと同じページ指定が可能です。（カンマ区切り可）&#xa;「数値-」とすれば最後のページまで対象となります。&#xa;「$数値」とすることで末尾から数えたページ番号として解釈します。&#xa;例：「1-2,$10,$2-」→最初の2p,最後から10p目,最後の2p" />
+                      </Style>
+                    </DataGridTemplateColumn.HeaderStyle>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding Path=ExtractPages, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" local:PlaceHolderBehavior.PlaceHolderText="すべて" BorderThickness="0"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn IsReadOnly="False" Header="キーワード指定">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding ContainingKeywordPage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         <DataGrid Grid.Row="2" AutoGenerateColumns="False" Margin="5,5,5,0" 
