@@ -11,6 +11,7 @@ using System.ComponentModel;
 using System.Windows.Input;
 using System.Windows.Data;
 using PdfUtility;
+using PdfUtility.Business;
 
 namespace MakePdfPlugin
 {
@@ -41,17 +42,19 @@ namespace MakePdfPlugin
             public bool CanExecute(object parameter) { return true; }
             public event EventHandler CanExecuteChanged;
 
+
             public void Execute(object parameter)
             {
                 try
                 {
+                    var createPdfService = new CreatePdfService(this.viewModel.tempDirectoryPath);
                     var paths = CollectionViewSource.GetDefaultView(viewModel.FilePaths).Cast<TargetPath>().Select(f => f.FilePath).ToList();
-                    var pdfmaker = new BatchPdfMaker(viewModel.tempDirectoryPath);
                     var keywords = viewModel.Keywords.Where(x => x.Word != "").Select(x => x.Word).ToList();
-                    if(viewModel.MergePdf)
-                        pdfmaker.MakePdfAndMerge(paths, Path.Combine(viewModel.outputDirectoryPath, viewModel.MergedPdfName), keywords);
-                    else
-                        pdfmaker.MakePdfs(paths, viewModel.outputDirectoryPath, keywords);
+                    createPdfService.CreatePdf(paths.Select(x => new CreatePdfTarget(x, "", true)).ToList(), keywords, viewModel.outputDirectoryPath, viewModel.MergePdf ? viewModel.MergedPdfName : null);
+                    //if(viewModel.MergePdf)
+                    //    pdfmaker.MakePdfAndMerge(paths, Path.Combine(viewModel.outputDirectoryPath, viewModel.MergedPdfName), keywords);
+                    //else
+                    //    pdfmaker.MakePdfs(paths, viewModel.outputDirectoryPath, keywords);
                     MessageBox.Show("完了!");
                     System.Diagnostics.Process.Start(viewModel.outputDirectoryPath);
                 }

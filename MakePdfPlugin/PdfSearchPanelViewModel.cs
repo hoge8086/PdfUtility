@@ -1,4 +1,6 @@
 ﻿using PdfUtility;
+using PdfUtility.Business;
+using PdfUtility.Infrastructure;
 using Reactive.Bindings;
 using System;
 using System.Collections.Generic;
@@ -30,6 +32,9 @@ namespace MakePdfPlugin
 
         public ReactiveCommand SearchCommand { get; }
 
+        private SearchPdfService searchPdfService = new SearchPdfService();
+        private PdfService pdfService = new PdfService();
+
         public PdfSearchPanelViewModel()
         {
             PdfFilePath = new ReactiveProperty<string>();
@@ -41,8 +46,8 @@ namespace MakePdfPlugin
                 try
                 {
                     var targets = Keywords.Select(x => new SearchTarget(x.Word, x.EnableRegexp, true)).ToList();
-                    PdfUtils.Search(targets, PdfFilePath.Value);
-                    var pageNum = PdfUtils.GetPageNum(PdfFilePath.Value);
+                    searchPdfService.Search(targets, PdfFilePath.Value);
+                    var pageNum = pdfService.GetPages(PdfFilePath.Value).NumberOfPages;
 
                     Results.Clear();
                     for(int p=1; p<=pageNum; p++)

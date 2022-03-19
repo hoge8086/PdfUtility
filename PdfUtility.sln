@@ -5,11 +5,11 @@ VisualStudioVersion = 16.0.32002.261
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakePdfPlugin", "MakePdfPlugin\MakePdfPlugin.csproj", "{05EAECE5-EE27-4FF9-BE71-AF9D66906484}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfMaker", "PdfMaker\PdfMaker.csproj", "{D8A27EE1-671A-4A40-B3AE-C8395F8E7950}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfUtility.Infrastructure", "PdfUtility.Infrastructure\PdfUtility.Infrastructure.csproj", "{0AC414E4-10A3-4C7E-A1BE-7322F523583B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfUtility.Tools", "PdfUtility.Tools\PdfUtility.Tools.csproj", "{C8078BCA-962B-44CE-B9B2-0C99074EB257}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfUtility.Business", "PdfUtility.Business\PdfUtility.Business.csproj", "{295C7C6A-1FF9-46A6-B8FA-BA314439AA86}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +21,6 @@ Global
 		{05EAECE5-EE27-4FF9-BE71-AF9D66906484}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05EAECE5-EE27-4FF9-BE71-AF9D66906484}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05EAECE5-EE27-4FF9-BE71-AF9D66906484}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D8A27EE1-671A-4A40-B3AE-C8395F8E7950}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D8A27EE1-671A-4A40-B3AE-C8395F8E7950}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D8A27EE1-671A-4A40-B3AE-C8395F8E7950}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D8A27EE1-671A-4A40-B3AE-C8395F8E7950}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0AC414E4-10A3-4C7E-A1BE-7322F523583B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0AC414E4-10A3-4C7E-A1BE-7322F523583B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AC414E4-10A3-4C7E-A1BE-7322F523583B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +29,10 @@ Global
 		{C8078BCA-962B-44CE-B9B2-0C99074EB257}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8078BCA-962B-44CE-B9B2-0C99074EB257}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8078BCA-962B-44CE-B9B2-0C99074EB257}.Release|Any CPU.Build.0 = Release|Any CPU
+		{295C7C6A-1FF9-46A6-B8FA-BA314439AA86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{295C7C6A-1FF9-46A6-B8FA-BA314439AA86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{295C7C6A-1FF9-46A6-B8FA-BA314439AA86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{295C7C6A-1FF9-46A6-B8FA-BA314439AA86}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
