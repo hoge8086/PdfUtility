@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Data;
 using PdfUtility;
 using PdfUtility.Business;
+using Reactive.Bindings;
 
 namespace MakePdfPlugin
 {
@@ -23,55 +24,42 @@ namespace MakePdfPlugin
         public ObservableCollection<TargetPath> FilePaths { get; }
         public bool MergePdf { get; set; }
         public string MergedPdfName { get; set; }
-        public MakePdfCommand MakePdfCmd { get; set; }
-        public OpenPrinterAndDeviceCommand OpenPrinterAndDeviceCmd { get; set; }
+        public ReactiveCommand MakePdfCmd { get; set; }
+        public ReactiveCommand OpenPrinterAndDeviceCmd { get; set; }
 
         private string outputDirectoryPath;
         private string tempDirectoryPath;
 
-        public class OpenPrinterAndDeviceCommand : ICommand
-        {
-            public event EventHandler CanExecuteChanged;
-            public bool CanExecute(object parameter) { return true; }
-            public void Execute(object parameter){ System.Diagnostics.Process.Start("control.exe", "/name Microsoft.DevicesAndPrinters");}
-        }
-        public class MakePdfCommand : ICommand
-        {
-            MakePdfPanelViewModel viewModel;
-            public MakePdfCommand(MakePdfPanelViewModel viewModel) { this.viewModel = viewModel; }
-            public bool CanExecute(object parameter) { return true; }
-            public event EventHandler CanExecuteChanged;
-
-
-            public void Execute(object parameter)
-            {
-                try
-                {
-                    var createPdfService = new CreatePdfService(this.viewModel.tempDirectoryPath);
-                    var paths = CollectionViewSource.GetDefaultView(viewModel.FilePaths).Cast<TargetPath>().Select(f => f.FilePath).ToList();
-                    var keywords = viewModel.Keywords.Where(x => x.Word != "").Select(x => x.Word).ToList();
-                    createPdfService.CreatePdf(paths.Select(x => new CreatePdfTarget(x, "", true)).ToList(), keywords, viewModel.outputDirectoryPath, viewModel.MergePdf ? viewModel.MergedPdfName : null);
-                    //if(viewModel.MergePdf)
-                    //    pdfmaker.MakePdfAndMerge(paths, Path.Combine(viewModel.outputDirectoryPath, viewModel.MergedPdfName), keywords);
-                    //else
-                    //    pdfmaker.MakePdfs(paths, viewModel.outputDirectoryPath, keywords);
-                    MessageBox.Show("完了!");
-                    System.Diagnostics.Process.Start(viewModel.outputDirectoryPath);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("エラー:\n" + ex.Message);
-                }
-            }
-        }
         public MakePdfPanelViewModel(
             string outputDirectoryPath,
             string tempDirectoryPath)
         {
             FilePaths = new ObservableCollection<TargetPath>();
             Keywords = new ObservableCollection<Keyword>();
-            MakePdfCmd = new MakePdfCommand(this);
-            OpenPrinterAndDeviceCmd = new OpenPrinterAndDeviceCommand();
+            MakePdfCmd = new ReactiveCommand();
+            MakePdfCmd.Subscribe(() =>
+            {
+                try
+                {
+                    var createPdfService = new CreatePdfService(tempDirectoryPath);
+                    var paths = CollectionViewSource.GetDefaultView(FilePaths).Cast<TargetPath>().Select(f => f.FilePath).ToList();
+                    var keywords = Keywords.Where(x => x.Word != "").Select(x => x.Word).ToList();
+                    createPdfService.CreatePdf(paths.Select(x => new CreatePdfTarget(x, "", true)).ToList(), keywords, outputDirectoryPath, MergePdf ? MergedPdfName : null);
+                    MessageBox.Show("完了!");
+                    System.Diagnostics.Process.Start(outputDirectoryPath);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("エラー:\n" + ex.Message);
+                }
+            });
+
+            OpenPrinterAndDeviceCmd = new ReactiveCommand();
+            OpenPrinterAndDeviceCmd.Subscribe(() =>
+            {
+                System.Diagnostics.Process.Start("control.exe", "/name Microsoft.DevicesAndPrinters");
+            });
+
             this.outputDirectoryPath = outputDirectoryPath;
             this.tempDirectoryPath = tempDirectoryPath;
             if (!Directory.Exists(outputDirectoryPath))
