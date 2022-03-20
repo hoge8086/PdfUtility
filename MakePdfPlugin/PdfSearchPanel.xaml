@@ -47,16 +47,23 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button Grid.Row="3" Content="検索実行" Margin="5,5,5,0" Command="{Binding SearchCommand}"/>
-        <TextBlock Grid.Row="4" Text="結果:" Margin="5,5,0,0"/>
+        <TextBlock Grid.Row="4" Text="結果  （!）ダブルクリックで該当ページを開きます" Margin="5,5,0,0"/>
         <DataGrid Grid.Row="5"  AutoGenerateColumns="False" Margin="5,5,5,0"
-                  SelectionUnit="Cell"
                   CanUserAddRows="False"
-                  ItemsSource="{Binding Path=Results}"
+                  ItemsSource="{Binding Results}"
                   AlternationCount="2"
+                  IsSynchronizedWithCurrentItem="True"
                   AlternatingRowBackground="AliceBlue"
                   GridLinesVisibility="Vertical"
                   HorizontalGridLinesBrush="LightGray"
                   VerticalGridLinesBrush="LightGray">
+            <DataGrid.InputBindings>
+                <!--参考:https://qiita.com/7of9/items/9d95aeee2c85910e0cf4-->
+                <!--DataGrid.SelectionUnit="Cell"だとうまくいかない(ComanndParameterがnullになる)--> 
+                <MouseBinding MouseAction="LeftDoubleClick"
+                              Command="{Binding ShowPdfCommand}"
+                              CommandParameter="{Binding Results/}"/>
+            </DataGrid.InputBindings>
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Path=Page, Mode=OneWay}"
                     CanUserReorder="True" CanUserResize="True" IsReadOnly="True"

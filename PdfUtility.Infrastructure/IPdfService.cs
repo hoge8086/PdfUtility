@@ -34,6 +34,5 @@ namespace PdfUtility.Infrastructure
         void ExtractPages(List<int> extractedPages, string srcPdfPath, string destPdfPath);
         PdfPages GetPages(string pdfPath);
         void Join(List<string> srcPdfPathList, string destPdfPath);
-        void ShowPdfByAdobeReader(string pdfPath, string adbeReaderExePath);
     }
 }

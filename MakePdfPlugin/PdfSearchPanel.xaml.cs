@@ -23,7 +23,18 @@ namespace MakePdfPlugin
         public PdfSearchPanel()
         {
             InitializeComponent();
-            this.DataContext = new PdfSearchPanelViewModel();
+            this.DataContext = new PdfSearchPanelViewModel()
+            {
+
+                ShowPdf = (string pdfPath, int page) =>
+                {
+
+                    var browser = new BrowsPdfWindow();
+                    browser.Owner = Window.GetWindow(this);
+                    browser.Show();
+                    browser.ShowPdf(pdfPath, page);
+                }
+            };
         }
 
         private void TextBox_PreviewDragOver(object sender, DragEventArgs e)

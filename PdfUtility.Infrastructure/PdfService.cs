@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PdfUtility.Infrastructure
 {
-    public class PdfService : IPdfService
+    public class PdfService
     {
         public void Join(List<string> srcPdfPathList, string destPdfPath)
         {
@@ -103,11 +103,6 @@ namespace PdfUtility.Infrastructure
                 pdfReader.Close();
             }
             return new PdfPages(pages);
-        }
-
-        public void ShowPdfByAdobeReader(string pdfPath, string adbeReaderExePath)
-        {
-
         }
     }
 }

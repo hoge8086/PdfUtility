@@ -29,8 +29,9 @@ namespace MakePdfPlugin
         public ReactiveProperty<string> PdfFilePath { get; private set; }
         public ObservableCollection<SearchKeyword> Keywords { get; private set; }
         public ObservableCollection<PageResults> Results { get; private set; }
-
         public ReactiveCommand SearchCommand { get; }
+        public ReactiveCommand<PageResults> ShowPdfCommand { get; }
+        public Action<string, int>  ShowPdf{ get; set; }
 
         private SearchPdfService searchPdfService = new SearchPdfService();
         private PdfService pdfService = new PdfService();
@@ -71,7 +72,19 @@ namespace MakePdfPlugin
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("エラー:\n" + ex.Message);
+                    MessageBox.Show(ex.Message, "エラー");
+                }
+            });
+            ShowPdfCommand = new ReactiveCommand<PageResults>();
+            ShowPdfCommand.Subscribe(x =>
+            {
+                try
+                {
+                    ShowPdf(PdfFilePath.Value, x.Page);
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "エラー");
                 }
             });
         }

@@ -110,6 +110,10 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="BrowsPdfWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MakePdfPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -120,6 +124,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BrowsPdfWindow.xaml.cs">
+      <DependentUpon>BrowsPdfWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MakePdfPanel.xaml.cs">
       <DependentUpon>MakePdfPanel.xaml</DependentUpon>
     </Compile>
