@@ -1,17 +1,15 @@
-﻿using PanelPluginInterface;
-using PdfUtility;
+﻿using System;
+using System.Reactive;
+using PanelPluginInterface;
 using PdfUtility.Business;
 using PdfUtility.Infrastructure;
 using Reactive.Bindings;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
-namespace MakePdfPlugin
+namespace PdfUtility.Plugins
 {
     public class PageResults
     {
@@ -25,7 +23,7 @@ namespace MakePdfPlugin
         public string Word { get; set; } = "";
         public bool EnableRegexp { get; set; } = false;
     }
-    public class PdfSearchPanelViewModel
+    public class SearchPdfPanelViewModel
     {
         public IPluginHost Host;
         public ReactiveProperty<string> PdfFilePath { get; private set; }
@@ -38,7 +36,7 @@ namespace MakePdfPlugin
         private SearchPdfService searchPdfService = new SearchPdfService();
         private PdfService pdfService = new PdfService();
 
-        public PdfSearchPanelViewModel(IPluginHost host)
+        public SearchPdfPanelViewModel(IPluginHost host)
         {
             Host = host;
             PdfFilePath = new ReactiveProperty<string>();
@@ -79,7 +77,7 @@ namespace MakePdfPlugin
                 }
             });
             ShowPdfCommand = new ReactiveCommand<PageResults>();
-            ShowPdfCommand.Subscribe(x =>
+            ShowPdfCommand.Subscribe((x) =>
             {
                 try
                 {

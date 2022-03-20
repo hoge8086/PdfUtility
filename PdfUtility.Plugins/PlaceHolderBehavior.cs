@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace MakePdfPlugin
+namespace PdfUtility.Plugins
 {
     // 参考:<https://tnakamura.hatenablog.com/entry/20100929/textbox_placeholder>
     // プレースホルダーを表示する添付ビヘイビア

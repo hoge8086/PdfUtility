@@ -14,17 +14,17 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PanelPluginInterface;
 
-namespace MakePdfPlugin
+namespace PdfUtility.Plugins
 {
     /// <summary>
     /// PdfSearchPanel.xaml の相互作用ロジック
     /// </summary>
-    public partial class PdfSearchPanel : UserControl
+    public partial class SearchPdfPanel : UserControl
     {
-        public PdfSearchPanel(IPluginHost host)
+        public SearchPdfPanel(IPluginHost host)
         {
             InitializeComponent();
-            this.DataContext = new PdfSearchPanelViewModel(host)
+            this.DataContext = new SearchPdfPanelViewModel(host)
             {
 
                 ShowPdf = (string pdfPath, int page) =>

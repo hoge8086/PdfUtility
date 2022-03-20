@@ -14,18 +14,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MakePdfPlugin
+namespace PdfUtility.Plugins
 {
     /// <summary>
     /// MakePdfPanel.xaml の相互作用ロジック
     /// </summary>
-    public partial class MakePdfPanel : UserControl
+    public partial class CreatePdfPanel : UserControl
     {
-        public MakePdfPanel(IPluginHost host)
+        public CreatePdfPanel(IPluginHost host)
         {
             InitializeComponent();
             var dir = System.IO.Directory.GetCurrentDirectory();
-            this.DataContext = new MakePdfPanelViewModel(
+            this.DataContext = new CreatePdfPanelViewModel(
                 host,
                 System.IO.Path.Combine(dir, "out"),
                 System.IO.Path.Combine(dir, "temp"));

@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32002.261
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakePdfPlugin", "MakePdfPlugin\MakePdfPlugin.csproj", "{05EAECE5-EE27-4FF9-BE71-AF9D66906484}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfUtility.Infrastructure", "PdfUtility.Infrastructure\PdfUtility.Infrastructure.csproj", "{0AC414E4-10A3-4C7E-A1BE-7322F523583B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfUtility.Tools", "PdfUtility.Tools\PdfUtility.Tools.csproj", "{C8078BCA-962B-44CE-B9B2-0C99074EB257}"
@@ -15,16 +13,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfUtility.BusinessTests", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PanelPluginInterface", "PanelPluginInterface\PanelPluginInterface.csproj", "{2C12115E-0B2E-4B63-84A6-0B8C17E5F153}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfUtility.Plugins", "PdfUtility.Plugins\PdfUtility.Plugins.csproj", "{8CFF44AB-04EE-4B34-B9C5-86483B8C77A2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{05EAECE5-EE27-4FF9-BE71-AF9D66906484}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{05EAECE5-EE27-4FF9-BE71-AF9D66906484}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{05EAECE5-EE27-4FF9-BE71-AF9D66906484}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{05EAECE5-EE27-4FF9-BE71-AF9D66906484}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0AC414E4-10A3-4C7E-A1BE-7322F523583B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0AC414E4-10A3-4C7E-A1BE-7322F523583B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AC414E4-10A3-4C7E-A1BE-7322F523583B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +41,10 @@ Global
 		{2C12115E-0B2E-4B63-84A6-0B8C17E5F153}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C12115E-0B2E-4B63-84A6-0B8C17E5F153}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C12115E-0B2E-4B63-84A6-0B8C17E5F153}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CFF44AB-04EE-4B34-B9C5-86483B8C77A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CFF44AB-04EE-4B34-B9C5-86483B8C77A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CFF44AB-04EE-4B34-B9C5-86483B8C77A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CFF44AB-04EE-4B34-B9C5-86483B8C77A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

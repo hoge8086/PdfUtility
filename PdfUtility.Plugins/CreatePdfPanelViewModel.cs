@@ -15,11 +15,11 @@ using PdfUtility.Business;
 using Reactive.Bindings;
 using PanelPluginInterface;
 
-namespace MakePdfPlugin
+namespace PdfUtility.Plugins
 {
     //ドラッグ&ドロップの実装
     //https://qiita.com/tomboyboy/items/cf58a1d5cbe6cd5b3155
-    public class MakePdfPanelViewModel : IDropTarget
+    public class CreatePdfPanelViewModel : IDropTarget
     {
         public IPluginHost Host;
         public ObservableCollection<Keyword> Keywords { get;  set; }
@@ -33,7 +33,7 @@ namespace MakePdfPlugin
         private string outputDirectoryPath;
         private string tempDirectoryPath;
 
-        public MakePdfPanelViewModel(
+        public CreatePdfPanelViewModel(
             IPluginHost host,
             string outputDirectoryPath,
             string tempDirectoryPath)
@@ -109,6 +109,14 @@ namespace MakePdfPlugin
             {
                 FilePaths.Add(new TargetPath(path));
             }
+        }
+
+        public void DragEnter(IDropInfo dropInfo)
+        {
+        }
+
+        public void DragLeave(IDropInfo dropInfo)
+        {
         }
     }
     public class Keyword
