@@ -69,6 +69,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PluginManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -98,6 +99,10 @@
     <ProjectReference Include="..\MakePdfPlugin\MakePdfPlugin.csproj">
       <Project>{05eaece5-ee27-4ff9-be71-af9d66906484}</Project>
       <Name>MakePdfPlugin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PanelPluginInterface\PanelPluginInterface.csproj">
+      <Project>{2c12115e-0b2e-4b63-84a6-0b8c17e5f153}</Project>
+      <Name>PanelPluginInterface</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

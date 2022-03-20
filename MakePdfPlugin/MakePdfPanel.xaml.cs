@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PanelPluginInterface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,11 +21,12 @@ namespace MakePdfPlugin
     /// </summary>
     public partial class MakePdfPanel : UserControl
     {
-        public MakePdfPanel()
+        public MakePdfPanel(IPluginHost host)
         {
             InitializeComponent();
-            var dir = System.IO.Directory.GetCurrentDirectory();;
+            var dir = System.IO.Directory.GetCurrentDirectory();
             this.DataContext = new MakePdfPanelViewModel(
+                host,
                 System.IO.Path.Combine(dir, "out"),
                 System.IO.Path.Combine(dir, "temp"));
         }

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PanelPluginInterface;
 
 namespace MakePdfPlugin
 {
@@ -20,10 +21,10 @@ namespace MakePdfPlugin
     /// </summary>
     public partial class PdfSearchPanel : UserControl
     {
-        public PdfSearchPanel()
+        public PdfSearchPanel(IPluginHost host)
         {
             InitializeComponent();
-            this.DataContext = new PdfSearchPanelViewModel()
+            this.DataContext = new PdfSearchPanelViewModel(host)
             {
 
                 ShowPdf = (string pdfPath, int page) =>

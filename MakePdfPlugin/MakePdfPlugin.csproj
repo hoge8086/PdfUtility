@@ -149,6 +149,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="SearchPdfPanelPlugin.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -169,6 +170,10 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PanelPluginInterface\PanelPluginInterface.csproj">
+      <Project>{2c12115e-0b2e-4b63-84a6-0b8c17e5f153}</Project>
+      <Name>PanelPluginInterface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PdfUtility.Business\PdfUtility.Business.csproj">
       <Project>{295c7c6a-1ff9-46a6-b8fa-ba314439aa86}</Project>
       <Name>PdfUtility.Business</Name>

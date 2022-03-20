@@ -13,6 +13,7 @@ using System.Windows.Data;
 using PdfUtility;
 using PdfUtility.Business;
 using Reactive.Bindings;
+using PanelPluginInterface;
 
 namespace MakePdfPlugin
 {
@@ -20,6 +21,7 @@ namespace MakePdfPlugin
     //https://qiita.com/tomboyboy/items/cf58a1d5cbe6cd5b3155
     public class MakePdfPanelViewModel : IDropTarget
     {
+        public IPluginHost Host;
         public ObservableCollection<Keyword> Keywords { get;  set; }
         public ObservableCollection<TargetPath> FilePaths { get; }
         public bool MergePdf { get; set; }
@@ -27,13 +29,16 @@ namespace MakePdfPlugin
         public AsyncReactiveCommand  MakePdfCmd { get; set; }
         public ReactiveCommand  OpenPrinterAndDeviceCmd { get; set; }
 
+
         private string outputDirectoryPath;
         private string tempDirectoryPath;
 
         public MakePdfPanelViewModel(
+            IPluginHost host,
             string outputDirectoryPath,
             string tempDirectoryPath)
         {
+            Host = host;
             FilePaths = new ObservableCollection<TargetPath>();
             Keywords = new ObservableCollection<Keyword>();
             MakePdfCmd = new AsyncReactiveCommand ();

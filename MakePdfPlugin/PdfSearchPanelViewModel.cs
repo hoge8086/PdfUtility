@@ -1,4 +1,5 @@
-﻿using PdfUtility;
+﻿using PanelPluginInterface;
+using PdfUtility;
 using PdfUtility.Business;
 using PdfUtility.Infrastructure;
 using Reactive.Bindings;
@@ -26,6 +27,7 @@ namespace MakePdfPlugin
     }
     public class PdfSearchPanelViewModel
     {
+        public IPluginHost Host;
         public ReactiveProperty<string> PdfFilePath { get; private set; }
         public ObservableCollection<SearchKeyword> Keywords { get; private set; }
         public ObservableCollection<PageResults> Results { get; private set; }
@@ -36,8 +38,9 @@ namespace MakePdfPlugin
         private SearchPdfService searchPdfService = new SearchPdfService();
         private PdfService pdfService = new PdfService();
 
-        public PdfSearchPanelViewModel()
+        public PdfSearchPanelViewModel(IPluginHost host)
         {
+            Host = host;
             PdfFilePath = new ReactiveProperty<string>();
             Keywords = new ObservableCollection<SearchKeyword>(Enumerable.Range(1, 5).Select(x => new SearchKeyword() { Number = x }));
             Results = new ObservableCollection<PageResults>();

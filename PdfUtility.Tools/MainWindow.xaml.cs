@@ -20,9 +20,27 @@ namespace PdfUtility.Tools
     /// </summary>
     public partial class MainWindow : Window
     {
+        PluginManager pluginManager;
         public MainWindow()
         {
             InitializeComponent();
+            pluginManager = new PluginManager();
+            try
+            {
+                pluginManager.LoadPlugins();
+                foreach(var plugin in pluginManager.Plugins)
+                {
+                    try
+                    {
+                        var item = new TabItem();
+                        item.Header = plugin.Instance.Name;
+                        item.Content = plugin.Instance.Panel;
+                        pluginsTabControl.Items.Add(item);
+                    }
+                    catch { }
+                }
+            }
+            catch { }
         }
     }
 }
