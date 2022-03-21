@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PdfUtility.Plugins"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -20,8 +21,11 @@
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="1" LastChildFill="True">
             <Label Content="PDFファイルパス:" Margin="5,5,0,0" />
-            <TextBox Height="20" Margin="5,5,5,0" Text="{Binding PdfFilePath.Value, UpdateSourceTrigger=PropertyChanged}"
-                     PreviewDragOver="TextBox_PreviewDragOver" Drop="TextBox_Drop"/>
+            <TextBox Height="20" Margin="5,5,5,0" Text="{Binding PdfFilePath.Value, UpdateSourceTrigger=PropertyChanged}">
+                <i:Interaction.Behaviors>
+                    <local:TextBoxFileDropBehavior/>
+                </i:Interaction.Behaviors>
+            </TextBox>
         </DockPanel>
         <DataGrid Grid.Row="2" AutoGenerateColumns="False" Margin="5,5,5,0" 
                   CanUserAddRows="False"

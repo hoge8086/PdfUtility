@@ -85,12 +85,17 @@
       <DependentUpon>CreatePdfPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="CreatePdfPanelViewModel.cs" />
-    <Compile Include="PlaceHolderBehavior.cs" />
+    <Compile Include="ExtractTextFromPdfPanel.xaml.cs">
+      <DependentUpon>ExtractTextFromPdfPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ExtractTextFromPdfPanelViewModel.cs" />
+    <Compile Include="behaviors\PlaceHolderBehavior.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchPdfPanel.xaml.cs">
       <DependentUpon>SearchPdfPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="SearchPdfPanelViewModel.cs" />
+    <Compile Include="behaviors\TextBoxFileDropBehavior.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -103,6 +108,10 @@
     <Page Include="CreatePdfPanel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ExtractTextFromPdfPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SearchPdfPanel.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -5,8 +5,8 @@ namespace PdfUtility.Infrastructure
 {
     public class Page
     {
-        public int PageNumber;
-        public string BodyText;
+        public int PageNumber { get; }
+        public string BodyText { get; }
 
         public Page(int pageNumber, string bodyText)
         {
