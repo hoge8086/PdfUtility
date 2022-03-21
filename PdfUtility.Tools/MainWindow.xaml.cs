@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,10 +24,13 @@ namespace PdfUtility.Tools
         {
             InitializeComponent();
             pluginManager = new PluginManager();
+            var jsonRepo = new JsonRepository<PluginConfig>(@".\plugin_config.json");
+            var config = jsonRepo.Load();
+            pluginManager.LoadPlugins();
+            var orderdPlugins = pluginManager.Plugins.OrderBy(x => GetTabOrderPriority(x, config, pluginManager.Plugins.Count));
             try
             {
-                pluginManager.LoadPlugins();
-                foreach(var plugin in pluginManager.Plugins)
+                foreach(var plugin in orderdPlugins)
                 {
                     try
                     {
@@ -41,6 +43,21 @@ namespace PdfUtility.Tools
                 }
             }
             catch { }
+
+            this.Closed += (s, e) =>
+            {
+                // TODO:タブ移動対応した場合はUIの順で保存する必要あり
+                config.PluginTabOrder = orderdPlugins.Select(x => x.ClassName).ToList();
+                jsonRepo.Save(config);
+            };
+
+            int GetTabOrderPriority(PanelPlugin plugin, PluginConfig cfg, int max)
+            {
+                var index = cfg.PluginTabOrder.FindIndex(x => x == plugin.ClassName);
+                if (index < 0)
+                    return max;
+                return index;
+            }
         }
     }
 }

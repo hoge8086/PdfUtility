@@ -30,15 +30,22 @@ namespace PdfUtility.Plugins
                 //ReadPdfCommand.Subscribe(async () =>
                 PdfFilePath.Subscribe(path =>
                 {
-                    if (string.IsNullOrEmpty(path))
-                        return;
+                    try
+                    {
+                        if (string.IsNullOrEmpty(path))
+                            return;
 
-                    var pages = pdfService.GetPages(path);
-                    Pages.Clear();
-                    foreach (var page in pages.Pages)
-                        Pages.Add(page);
+                        var pages = pdfService.GetPages(path);
+                        Pages.Clear();
+                        foreach (var page in pages.Pages)
+                            Pages.Add(page);
 
-                    DisplayPageIndex.Value = 0;
+                        DisplayPageIndex.Value = 0;
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "エラー");
+                    }
 
                 });
             }catch(Exception ex)
