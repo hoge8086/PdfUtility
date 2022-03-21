@@ -16,8 +16,7 @@ namespace PanelPluginInterface
     }
     public interface IPanelPlugin
     {
-        string Name { get; }
+        string PluginName { get; }
         UserControl Panel { get; }
-        IPluginHost Host { get; set; }
     }
 }

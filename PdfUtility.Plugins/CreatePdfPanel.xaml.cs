@@ -19,8 +19,11 @@ namespace PdfUtility.Plugins
     /// <summary>
     /// MakePdfPanel.xaml の相互作用ロジック
     /// </summary>
-    public partial class CreatePdfPanel : UserControl
+    public partial class CreatePdfPanel : UserControl, IPanelPlugin
     {
+        public string PluginName => "PDF化";
+
+        public UserControl Panel => this;
         public CreatePdfPanel(IPluginHost host)
         {
             InitializeComponent();

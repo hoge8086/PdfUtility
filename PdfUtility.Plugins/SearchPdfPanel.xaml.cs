@@ -19,8 +19,12 @@ namespace PdfUtility.Plugins
     /// <summary>
     /// PdfSearchPanel.xaml の相互作用ロジック
     /// </summary>
-    public partial class SearchPdfPanel : UserControl
+    public partial class SearchPdfPanel : UserControl, IPanelPlugin
     {
+        public string PluginName => "PDF検索(ページ単位)";
+
+        public UserControl Panel => this;
+
         public SearchPdfPanel(IPluginHost host)
         {
             InitializeComponent();

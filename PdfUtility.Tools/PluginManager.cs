@@ -52,14 +52,16 @@ namespace PdfUtility.Tools
                         //プラグインとして有効か調べる
                         if (t.IsClass && t.IsPublic && !t.IsAbstract && t.GetInterface(ipluginName) != null)
                         {
-                            //PluginInfoをコレクションに追加する
-                            Plugins.Add(new PanelPlugin(dll, t.FullName, this));
+                            try
+                            {
+                                //PluginInfoをコレクションに追加する
+                                Plugins.Add(new PanelPlugin(dll, t.FullName, this));
+                            }
+                            catch { }
                         }
                     }
                 }
-                catch
-                {
-                }
+                catch { }
             }
         }
 
@@ -67,15 +69,15 @@ namespace PdfUtility.Tools
 
     public class PanelPlugin
     {
-        public string Location { get; }
+        public string AssemblyPath { get; }
         public string ClassName { get; }
         public IPanelPlugin Instance { get; }
-        public PanelPlugin(string path, string cls, IPluginHost host)
+        public PanelPlugin(string path, string className, IPluginHost host)
         {
-            this.Location = path;
-            this.ClassName = cls;
+            this.AssemblyPath = path;
+            this.ClassName = className;
 
-            Assembly asm = Assembly.LoadFrom(this.Location);
+            Assembly asm = Assembly.LoadFrom(this.AssemblyPath);
             //クラス名からインスタンスを作成する
             Instance = (IPanelPlugin) asm.CreateInstance(
                 this.ClassName,

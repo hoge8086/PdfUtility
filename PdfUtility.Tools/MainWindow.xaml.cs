@@ -33,7 +33,7 @@ namespace PdfUtility.Tools
                     try
                     {
                         var item = new TabItem();
-                        item.Header = plugin.Instance.Name;
+                        item.Header = plugin.Instance.PluginName;
                         item.Content = plugin.Instance.Panel;
                         pluginsTabControl.Items.Add(item);
                     }
