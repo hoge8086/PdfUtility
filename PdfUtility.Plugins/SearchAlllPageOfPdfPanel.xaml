@@ -65,7 +65,10 @@
                     CanUserSort="True" Header="ページ" Width="Auto" />
                 <DataGridTextColumn Binding="{Binding Path=Word, Mode=OneWay}"
                     CanUserReorder="True" CanUserResize="True" IsReadOnly="True"
-                    CanUserSort="True" Header="キーワード" Width="*" />
+                    CanUserSort="True" Header="キーワード" Width="Auto" />
+                <DataGridTextColumn Binding="{Binding Path=Line, Mode=OneWay}"
+                    CanUserReorder="True" CanUserResize="True" IsReadOnly="True"
+                    CanUserSort="True" Header="該当行" Width="*" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

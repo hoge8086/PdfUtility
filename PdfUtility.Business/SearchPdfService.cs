@@ -11,14 +11,16 @@ namespace PdfUtility.Business
     public class SearchHit
     {
         public int Page;
-        public int LineOrIndex;
-        public string Text;
+        public int LineNumber;
+        public string Word;
+        public string Line;
 
-        public SearchHit(int page, int lineOrIndex, string text)
+        public SearchHit(int page, string word, string line, int lineNumber)
         {
             Page = page;
-            LineOrIndex = lineOrIndex;
-            Text = text;
+            Word = word;
+            Line = line;
+            LineNumber = lineNumber;
         }
     }
     
@@ -74,9 +76,14 @@ namespace PdfUtility.Business
                 foreach(var page in pages.Pages)
                 {
                     MatchCollection results = Regex.Matches(page.BodyText, target.RegexpKeword, target.RegexOptions);
+
                     foreach (Match m in results)
                     {
-                        target.Hits.Add(new SearchHit(page.PageNumber, m.Index, m.Value));
+                        target.Hits.Add(new SearchHit(
+                            page.PageNumber,
+                            m.Value,
+                            page.GetLine(m.Index),
+                            page.GetLineNumber(m.Index)));
                     }
                 }
             }

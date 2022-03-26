@@ -58,15 +58,15 @@ namespace PdfUtility.Plugins
                         {
                             Page = p,
                             Words = targets.Select(t => {
-                                var hits = t.Hits.Where(x => x.Page == p).Select(x => x.Text);
+                                var hits = t.Hits.Where(x => x.Page == p).Select(x => x.Word);
 
                                 if (hits.Count() == 0)
                                     return "";
 
                                 if (!t.EnableRegexp)
-                                    return t.Hits[0].Text;
+                                    return t.Hits[0].Word;
 
-                                return String.Join(",", t.Hits.Where(x => x.Page == p).Select(x => x.Text));
+                                return String.Join(",", t.Hits.Where(x => x.Page == p).Select(x => x.Word));
                             }).ToList(),
                         });
                     }

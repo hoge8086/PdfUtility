@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace PdfUtility.Infrastructure
@@ -12,6 +13,27 @@ namespace PdfUtility.Infrastructure
         {
             PageNumber = pageNumber;
             BodyText = bodyText;
+        }
+
+        public string GetLine(int index)
+        {
+            var crlf = new char[] { '\n', '\r' };
+            var indexOfBeginLine = BodyText.LastIndexOfAny(crlf, index);
+            if (indexOfBeginLine == -1)
+                indexOfBeginLine = 0;
+            else
+                indexOfBeginLine += 1;
+
+            var indexOfEndLine = BodyText.IndexOfAny(crlf, index);
+            if(indexOfEndLine == -1)
+                indexOfEndLine = BodyText.Length - 1;
+
+            return BodyText.Substring(indexOfBeginLine, indexOfEndLine - indexOfBeginLine);
+        }
+
+        public int GetLineNumber(int index)
+        {
+            return BodyText.Substring(0, index).CountOf("\n");
         }
     }
 

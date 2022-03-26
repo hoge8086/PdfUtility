@@ -15,6 +15,7 @@ namespace PdfUtility.Plugins
     {
         public int Page { get; set; }
         public string Word { get; set; }
+        public string Line { get; set; }
     }
 
     public class SearchAlllPageOfPdfPanelViewModel
@@ -49,7 +50,7 @@ namespace PdfUtility.Plugins
                     Results.Clear();
                     foreach(var hit in target[0].Hits)
                     {
-                        Results.Add(new PageResult { Page = hit.Page, Word = hit.Text });
+                        Results.Add(new PageResult { Page = hit.Page, Word = hit.Word, Line=hit.Line });
                     }
 
                     if(Results.Count == 0)
