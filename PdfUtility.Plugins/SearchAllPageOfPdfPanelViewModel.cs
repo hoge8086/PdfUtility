@@ -18,7 +18,7 @@ namespace PdfUtility.Plugins
         public string Line { get; set; }
     }
 
-    public class SearchAlllPageOfPdfPanelViewModel
+    public class SearchAllPageOfPdfPanelViewModel
     {
         public IPluginHost Host;
         public ReactiveProperty<string> PdfFilePath { get; private set; }
@@ -32,7 +32,7 @@ namespace PdfUtility.Plugins
         private SearchPdfService searchPdfService = new SearchPdfService();
         private PdfService pdfService = new PdfService();
 
-        public SearchAlllPageOfPdfPanelViewModel(IPluginHost host)
+        public SearchAllPageOfPdfPanelViewModel(IPluginHost host)
         {
             Host = host;
             PdfFilePath = new ReactiveProperty<string>();

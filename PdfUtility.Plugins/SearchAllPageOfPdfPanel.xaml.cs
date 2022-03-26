@@ -19,15 +19,15 @@ namespace PdfUtility.Plugins
     /// <summary>
     /// SearchAlllPageOfPdfPanel.xaml の相互作用ロジック
     /// </summary>
-    public partial class SearchAlllPageOfPdfPanel : UserControl, IPanelPlugin
+    public partial class SearchAllPageOfPdfPanel : UserControl, IPanelPlugin
     {
         public string PluginName => "PDF検索(全ページ)";
 
         public UserControl Panel => this;
-        public SearchAlllPageOfPdfPanel(IPluginHost host)
+        public SearchAllPageOfPdfPanel(IPluginHost host)
         {
             InitializeComponent();
-            this.DataContext = new SearchAlllPageOfPdfPanelViewModel(host)
+            this.DataContext = new SearchAllPageOfPdfPanelViewModel(host)
             {
 
                 ShowPdf = (string pdfPath, int page) =>

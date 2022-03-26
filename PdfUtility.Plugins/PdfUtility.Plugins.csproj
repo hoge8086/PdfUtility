@@ -91,10 +91,10 @@
     <Compile Include="ExtractTextFromPdfPanelViewModel.cs" />
     <Compile Include="behaviors\PlaceHolderBehavior.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SearchAlllPageOfPdfPanel.xaml.cs">
-      <DependentUpon>SearchAlllPageOfPdfPanel.xaml</DependentUpon>
+    <Compile Include="SearchAllPageOfPdfPanel.xaml.cs">
+      <DependentUpon>SearchAllPageOfPdfPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SearchAlllPageOfPdfPanelViewModel.cs" />
+    <Compile Include="SearchAllPageOfPdfPanelViewModel.cs" />
     <Compile Include="SearchPdfPanel.xaml.cs">
       <DependentUpon>SearchPdfPanel.xaml</DependentUpon>
     </Compile>
@@ -117,7 +117,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SearchAlllPageOfPdfPanel.xaml">
+    <Page Include="SearchAllPageOfPdfPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
