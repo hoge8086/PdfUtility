@@ -12,15 +12,17 @@ namespace PdfUtility.Business
     {
         public int Page;
         public int LineNumber;
+        public int TotalNumberOfLines;
         public string Word;
         public string Line;
 
-        public SearchHit(int page, string word, string line, int lineNumber)
+        public SearchHit(int page, string word, string line, int lineNumber, int totalNumberOfLines)
         {
             Page = page;
             Word = word;
             Line = line;
             LineNumber = lineNumber;
+            TotalNumberOfLines = totalNumberOfLines;
         }
     }
     
@@ -83,7 +85,8 @@ namespace PdfUtility.Business
                             page.PageNumber,
                             m.Value,
                             page.GetLine(m.Index),
-                            page.GetLineNumber(m.Index)));
+                            page.GetLineNumber(m.Index),
+                            page.NumberOfLines));
                     }
                 }
             }

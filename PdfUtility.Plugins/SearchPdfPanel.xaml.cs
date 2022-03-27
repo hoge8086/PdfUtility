@@ -21,25 +21,22 @@ namespace PdfUtility.Plugins
     /// </summary>
     public partial class SearchPdfPanel : UserControl, IPanelPlugin
     {
-        public string PluginName => "PDF検索(ページ単位)";
+        public string PluginName => "PDF検索";
 
         public UserControl Panel => this;
 
         public SearchPdfPanel(IPluginHost host)
         {
             InitializeComponent();
-            this.DataContext = new SearchPdfPanelViewModel(host)
-            {
-
-                ShowPdf = (string pdfPath, int page) =>
+            this.DataContext = new SearchPdfPanelViewModel(
+                host, 
+                (string pdfPath, int page) =>
                 {
-
                     var browser = new BrowsPdfWindow();
                     browser.Owner = Window.GetWindow(this);
                     browser.Show();
                     browser.ShowPdf(pdfPath, page);
-                }
-            };
+                });
         }
     }
 }

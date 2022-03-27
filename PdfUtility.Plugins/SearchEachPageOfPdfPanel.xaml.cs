@@ -1,5 +1,4 @@
-﻿using PanelPluginInterface;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,11 +16,11 @@ using System.Windows.Shapes;
 namespace PdfUtility.Plugins
 {
     /// <summary>
-    /// SearchAlllPageOfPdfPanel.xaml の相互作用ロジック
+    /// SearchEachPageOfPdfPanel.xaml の相互作用ロジック
     /// </summary>
-    public partial class SearchAllPageOfPdfPanel : UserControl
+    public partial class SearchEachPageOfPdfPanel : UserControl
     {
-        public SearchAllPageOfPdfPanel()
+        public SearchEachPageOfPdfPanel()
         {
             InitializeComponent();
         }

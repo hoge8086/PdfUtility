@@ -94,7 +94,11 @@
     <Compile Include="SearchAllPageOfPdfPanel.xaml.cs">
       <DependentUpon>SearchAllPageOfPdfPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SearchEachPageOfPdfPanelViewModel.cs" />
     <Compile Include="SearchAllPageOfPdfPanelViewModel.cs" />
+    <Compile Include="SearchEachPageOfPdfPanel.xaml.cs">
+      <DependentUpon>SearchEachPageOfPdfPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SearchPdfPanel.xaml.cs">
       <DependentUpon>SearchPdfPanel.xaml</DependentUpon>
     </Compile>
@@ -118,6 +122,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SearchAllPageOfPdfPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SearchEachPageOfPdfPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,0 +1,133 @@
+﻿<UserControl x:Class="PdfUtility.Plugins.SearchEachPageOfPdfPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PdfUtility.Plugins"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="notFoundColor" Color="LightGray"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <DataGrid Grid.Row="0" AutoGenerateColumns="False" Margin="5,5,5,0" 
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  ItemsSource="{Binding Path=Keywords}"
+                  VerticalGridLinesBrush="LightGray"
+                  HorizontalGridLinesBrush="LightGray">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Number, Mode=TwoWay}"
+                    CanUserReorder="True" CanUserResize="True" IsReadOnly="True"
+                    CanUserSort="True" Header="No." Width="Auto"/>
+                <DataGridTextColumn Binding="{Binding Word, Mode=TwoWay}"
+                    CanUserReorder="True" CanUserResize="True" IsReadOnly="False"
+                    CanUserSort="True" Header="検索キーワード" Width="*" />
+                <DataGridTemplateColumn IsReadOnly="False" Header="正規表現">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding EnableRegexp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Grid.Row="1" Content="検索実行" Margin="5,5,5,0" Command="{Binding SearchCommand}"/>
+        <TextBlock Grid.Row="2" Text="結果  （!）ダブルクリックで該当ページを開きます" Margin="5,5,0,0"/>
+        <DataGrid Grid.Row="3"  AutoGenerateColumns="False" Margin="5,5,5,0"
+                  CanUserAddRows="False"
+                  ItemsSource="{Binding Results}"
+                  AlternationCount="2"
+                  IsSynchronizedWithCurrentItem="True"
+                  AlternatingRowBackground="AliceBlue"
+                  GridLinesVisibility="Vertical"
+                  HorizontalGridLinesBrush="LightGray"
+                  VerticalGridLinesBrush="LightGray">
+            <DataGrid.InputBindings>
+                <!--参考:https://qiita.com/7of9/items/9d95aeee2c85910e0cf4-->
+                <!--DataGrid.SelectionUnit="Cell"だとうまくいかない(ComanndParameterがnullになる)--> 
+                <MouseBinding MouseAction="LeftDoubleClick"
+                              Command="{Binding ShowPdfCommand}"
+                              CommandParameter="{Binding Results/}"/>
+            </DataGrid.InputBindings>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=Page, Mode=OneWay}"
+                    CanUserReorder="True" CanUserResize="True" IsReadOnly="True"
+                    CanUserSort="True" Header="ページ" Width="Auto" />
+                <DataGridTextColumn Binding="{Binding Path=Words[0], Mode=OneWay}"
+                    CanUserReorder="True" CanUserResize="True" IsReadOnly="True"
+                    CanUserSort="True" Header="No.1" Width="Auto">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="{x:Type DataGridCell}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Words[0]}" Value="">
+                                    <Setter Property="Background" Value="{StaticResource notFoundColor}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Words[1], Mode=OneWay}"
+                    CanUserReorder="True" CanUserResize="True" IsReadOnly="True"
+                    CanUserSort="True" Header="No.2" Width="Auto">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="{x:Type DataGridCell}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Words[1]}" Value="">
+                                    <Setter Property="Background" Value="{StaticResource notFoundColor}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Words[2], Mode=OneWay}"
+                    CanUserReorder="True" CanUserResize="True" IsReadOnly="True"
+                    CanUserSort="True" Header="No.3" Width="Auto">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="{x:Type DataGridCell}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Words[2]}" Value="">
+                                    <Setter Property="Background" Value="{StaticResource notFoundColor}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Words[3], Mode=OneWay}"
+                    CanUserReorder="True" CanUserResize="True" IsReadOnly="True"
+                    CanUserSort="True" Header="No.4" Width="Auto">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="{x:Type DataGridCell}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Words[3]}" Value="">
+                                    <Setter Property="Background" Value="{StaticResource notFoundColor}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Words[4], Mode=OneWay}"
+                    CanUserReorder="True" CanUserResize="True" IsReadOnly="True"
+                    CanUserSort="True" Header="No.5" Width="Auto">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="{x:Type DataGridCell}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Words[4]}" Value="">
+                                    <Setter Property="Background" Value="{StaticResource notFoundColor}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

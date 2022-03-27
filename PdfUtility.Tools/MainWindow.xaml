@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PdfUtility.Tools"
         mc:Ignorable="d"
-        Title="PDF便利ツール" Height="350" Width="525">
+        Title="PDF便利ツール" Height="400" Width="525">
     <TabControl x:Name="pluginsTabControl">
     </TabControl>
 </Window>

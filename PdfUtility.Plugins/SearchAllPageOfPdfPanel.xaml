@@ -15,15 +15,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Margin="5,5,5,0">
-            <DockPanel LastChildFill="True">
-                <Label Content="PDFファイルパス:" Margin="5,5,0,0" />
-                <TextBox Height="20" Margin="5,5,5,0" Text="{Binding PdfFilePath.Value, UpdateSourceTrigger=PropertyChanged}">
-                    <i:Interaction.Behaviors>
-                        <local:TextBoxFileDropBehavior/>
-                    </i:Interaction.Behaviors>
-                </TextBox>
-            </DockPanel>
+        <StackPanel Grid.Row="0" Margin="5,0,5,0">
             <DockPanel LastChildFill="True">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -69,6 +61,16 @@
                 <DataGridTextColumn Binding="{Binding Path=Line, Mode=OneWay}"
                     CanUserReorder="True" CanUserResize="True" IsReadOnly="True"
                     CanUserSort="True" Header="該当行" Width="*" />
+                <DataGridTextColumn
+                    CanUserReorder="True" CanUserResize="True" IsReadOnly="True"
+                    CanUserSort="True" Header="行番号" Width="Auto">
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding StringFormat="{}{0}/{1}">
+                          <Binding Path="LineNumber"/>
+                          <Binding Path="NumberOfTotalLines"/>
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

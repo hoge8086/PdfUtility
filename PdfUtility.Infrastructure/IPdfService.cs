@@ -8,11 +8,13 @@ namespace PdfUtility.Infrastructure
     {
         public int PageNumber { get; }
         public string BodyText { get; }
+        public int NumberOfLines { get; }
 
         public Page(int pageNumber, string bodyText)
         {
             PageNumber = pageNumber;
             BodyText = bodyText;
+            NumberOfLines = GetLineNumber(bodyText.Length - 1);
         }
 
         public string GetLine(int index)
@@ -33,7 +35,7 @@ namespace PdfUtility.Infrastructure
 
         public int GetLineNumber(int index)
         {
-            return BodyText.Substring(0, index).CountOf("\n");
+            return BodyText.Substring(0, index + 1).CountOf("\n");
         }
     }
 

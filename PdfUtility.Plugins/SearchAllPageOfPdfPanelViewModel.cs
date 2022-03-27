@@ -16,6 +16,8 @@ namespace PdfUtility.Plugins
         public int Page { get; set; }
         public string Word { get; set; }
         public string Line { get; set; }
+        public int LineNumber { get; set; }
+        public int NumberOfTotalLines { get; set; }
     }
 
     public class SearchAllPageOfPdfPanelViewModel
@@ -32,10 +34,10 @@ namespace PdfUtility.Plugins
         private SearchPdfService searchPdfService = new SearchPdfService();
         private PdfService pdfService = new PdfService();
 
-        public SearchAllPageOfPdfPanelViewModel(IPluginHost host)
+        public SearchAllPageOfPdfPanelViewModel(IPluginHost host, ReactiveProperty<string> pdfFilePath)
         {
             Host = host;
-            PdfFilePath = new ReactiveProperty<string>();
+            PdfFilePath = pdfFilePath;
             Keyword = new ReactiveProperty<string>();
             EnableRegexp = false;
             Results = new ObservableCollection<PageResult>();
@@ -50,7 +52,12 @@ namespace PdfUtility.Plugins
                     Results.Clear();
                     foreach(var hit in target[0].Hits)
                     {
-                        Results.Add(new PageResult { Page = hit.Page, Word = hit.Word, Line=hit.Line });
+                        Results.Add(new PageResult {
+                                Page = hit.Page,
+                                Word = hit.Word,
+                                Line=hit.Line,
+                                LineNumber = hit.LineNumber,
+                                NumberOfTotalLines = hit.TotalNumberOfLines});
                     }
 
                     if(Results.Count == 0)
