@@ -22,7 +22,7 @@
                     </i:Interaction.Behaviors>
                 </TextBox>
             </DockPanel>
-            <TextBlock Text="（ｉ）ここで得られるPDFのテキストに対してキーワード検索を行っています。デバッグ用に活用ください。" Margin="5,5,0,0" />
+            <TextBlock Text="（i）ここで得られるPDFのテキストに対してキーワード検索を行っています。デバッグ用に活用ください。" Margin="5,5,0,0" />
             <!--
             <Button Grid.Row="2" Content="読込み" Command="{Binding ReadPdfCommand}"/>
             -->

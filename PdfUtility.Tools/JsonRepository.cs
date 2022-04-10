@@ -21,7 +21,6 @@ namespace PdfUtility.Tools
         {
             try
             {
-                T obj;
                 string jsonText = File.ReadAllText(jsonPath, Encoding.UTF8);
                 return JsonSerializer.Deserialize<T>(jsonText);
             }

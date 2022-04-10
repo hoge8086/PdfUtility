@@ -17,14 +17,14 @@ namespace PdfUtility.Plugins
         public List<string> Words { get; set; }
     }
 
-    public class SearchKeyword
-    {
-        public int Number { get; set; }
-        public string Word { get; set; } = "";
-        public bool EnableRegexp { get; set; } = false;
-    }
     public class SearchEachPageOfPdfPanelViewModel
     {
+        public class SearchKeyword
+        {
+            public int Number { get; set; }
+            public string Word { get; set; } = "";
+            public bool EnableRegexp { get; set; } = false;
+        }
         public IPluginHost Host;
         public ReactiveProperty<string> PdfFilePath { get; private set; }
         public ObservableCollection<SearchKeyword> Keywords { get; private set; }
@@ -48,7 +48,7 @@ namespace PdfUtility.Plugins
                 try
                 {
                     var targets = Keywords.Select(x => new SearchTarget(x.Word, x.EnableRegexp, true)).ToList();
-                    searchPdfService.Search(targets, PdfFilePath.Value);
+                    var results = searchPdfService.Search(targets, PdfFilePath.Value);
                     var pageNum = pdfService.GetPages(PdfFilePath.Value).NumberOfPages;
 
                     Results.Clear();
@@ -57,16 +57,16 @@ namespace PdfUtility.Plugins
                         Results.Add(new PageResults()
                         {
                             Page = p,
-                            Words = targets.Select(t => {
-                                var hits = t.Hits.Where(x => x.Page == p).Select(x => x.Word);
+                            Words = results.Select(r => {
+                                var hits = r.Hits.Where(x => x.Page == p).Select(x => x.Word);
 
                                 if (hits.Count() == 0)
                                     return "";
 
-                                if (!t.EnableRegexp)
-                                    return t.Hits[0].Word;
+                                if (!r.SearchTarget.EnableRegexp)
+                                    return r.Hits[0].Word;
 
-                                return String.Join(",", t.Hits.Where(x => x.Page == p).Select(x => x.Word));
+                                return String.Join(",", r.Hits.Where(x => x.Page == p).Select(x => x.Word));
                             }).ToList(),
                         });
                     }

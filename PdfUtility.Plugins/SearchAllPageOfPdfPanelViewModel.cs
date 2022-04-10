@@ -47,10 +47,10 @@ namespace PdfUtility.Plugins
                 try
                 {
                     var target = new List<SearchTarget> { new SearchTarget(Keyword.Value, EnableRegexp, true) };
-                    searchPdfService.Search(target, PdfFilePath.Value);
+                    var results = searchPdfService.Search(target, PdfFilePath.Value).ToList();
 
                     Results.Clear();
-                    foreach(var hit in target[0].Hits)
+                    foreach(var hit in results[0].Hits)
                     {
                         Results.Add(new PageResult {
                                 Page = hit.Page,

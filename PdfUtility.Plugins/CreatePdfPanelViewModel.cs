@@ -21,8 +21,13 @@ namespace PdfUtility.Plugins
     //https://qiita.com/tomboyboy/items/cf58a1d5cbe6cd5b3155
     public class CreatePdfPanelViewModel : IDropTarget
     {
+        public class SearchKeyword
+        {
+            public string Keyword { get; set; } = "";
+            public bool EnableRegexp { get; set; } = false;
+        }
         public IPluginHost Host;
-        public ObservableCollection<Keyword> Keywords { get;  set; }
+        public ObservableCollection<SearchKeyword> Keywords { get;  set; }
         public ObservableCollection<TargetPath> FilePaths { get; }
         public bool MergePdf { get; set; }
         public string MergedPdfName { get; set; }
@@ -40,7 +45,7 @@ namespace PdfUtility.Plugins
         {
             Host = host;
             FilePaths = new ObservableCollection<TargetPath>();
-            Keywords = new ObservableCollection<Keyword>();
+            Keywords = new ObservableCollection<SearchKeyword>();
             MakePdfCmd = new AsyncReactiveCommand ();
             MakePdfCmd.Subscribe(async () =>
             {
@@ -48,7 +53,7 @@ namespace PdfUtility.Plugins
                 {
                     var createPdfService = new CreatePdfService(tempDirectoryPath);
                     var srcFiles = CollectionViewSource.GetDefaultView(FilePaths).Cast<TargetPath>();
-                    var keywords = Keywords.Where(x => x.Word != "").Select(x => x.Word).ToList();
+                    var keywords = Keywords.Where(x => !string.IsNullOrEmpty(x.Keyword)).Select(x => new SearchTarget(x.Keyword, x.EnableRegexp, true)).ToList();
                     if (MergePdf && string.IsNullOrEmpty(MergedPdfName))
                         throw new Exception("結合PDFのファイル名が空です。");
 

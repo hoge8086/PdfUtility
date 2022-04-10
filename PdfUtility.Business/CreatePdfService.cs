@@ -47,7 +47,7 @@ namespace PdfUtility.Business
             tempDir = new TempDirectory(tempDirPath);
             pdfService = new PdfService();
         }
-        public void CreatePdf(List<CreatePdfTarget> createTargets, List<string> keywords, string OutputDirectory,  string MargeFileName)
+        public void CreatePdf(List<CreatePdfTarget> createTargets, List<SearchTarget> keywords, string OutputDirectory,  string MargeFileName)
         {
             if (createTargets.Count < 1)
                 throw new ArgumentException("PDF化対象のファイルがありません。");
@@ -116,14 +116,13 @@ namespace PdfUtility.Business
             }
             return file;
         }
-        private ProessingFile ExtractPageByPageKeywords(ProessingFile target, List<string> keywords)
+        private ProessingFile ExtractPageByPageKeywords(ProessingFile target, List<SearchTarget> keywords)
         {
             if(target.Target.ExtractContainingKeywordPage && keywords != null && keywords.Count > 0)
             {
                 var outPath = Path.ChangeExtension(target.CurrentPath, ".keyword");
-                var searchTarget = keywords.Select(k => new SearchTarget(k, false, true)).ToList();
-                new SearchPdfService().Search(searchTarget, target.CurrentPath);
-                var extractPages = searchTarget.SelectMany(t => t.Hits.Select(h => h.Page)).Distinct().ToList();
+                var results =new SearchPdfService().Search(keywords, target.CurrentPath);
+                var extractPages = results.SelectMany(t => t.Hits.Select(h => h.Page)).Distinct().ToList();
                 extractPages.Sort();
 
                 pdfService.ExtractPages(extractPages, target.CurrentPath, outPath);

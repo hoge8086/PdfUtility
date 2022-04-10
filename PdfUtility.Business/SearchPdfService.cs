@@ -25,20 +25,33 @@ namespace PdfUtility.Business
             TotalNumberOfLines = totalNumberOfLines;
         }
     }
+
+    public class SearchResult
+    {
+        public SearchTarget SearchTarget;
+        public List<SearchHit> Hits;
+
+        public SearchResult(SearchTarget searchTarget)
+        {
+            SearchTarget = searchTarget;
+            Hits = new List<SearchHit>();
+        }
+
+    }
     
     public class SearchTarget
     {
         public string Keyword;
         public bool EnableRegexp;
         public bool IgnoreCase;
-        public List<SearchHit> Hits;
+        //public List<SearchHit> Hits;
 
         public SearchTarget(string keyword, bool enableRegexp, bool ignoreCase)
         {
             Keyword = keyword;
             EnableRegexp = enableRegexp;
             IgnoreCase = ignoreCase;
-            Hits = new List<SearchHit>();
+            //Hits = new List<SearchHit>();
         }
 
         public string RegexpKeword {
@@ -64,7 +77,7 @@ namespace PdfUtility.Business
     public class SearchPdfService
     {
 
-        public void Search(List<SearchTarget> searchTargets, string pdfPath)
+        public IEnumerable<SearchResult> Search(List<SearchTarget> searchTargets, string pdfPath)
         {
             var pdfService = new PdfService();
             var pages = pdfService.GetPages(pdfPath);
@@ -74,20 +87,22 @@ namespace PdfUtility.Business
                 if (string.IsNullOrEmpty(target.Keyword))
                     continue;
 
-                target.Hits = new List<SearchHit>();
+                //target.Hits = new List<SearchHit>();
+                var result = new SearchResult(target);
                 foreach(var page in pages.Pages)
                 {
                     MatchCollection results = Regex.Matches(page.BodyText, target.RegexpKeword, target.RegexOptions);
 
                     foreach (Match m in results)
                     {
-                        target.Hits.Add(new SearchHit(
+                        result.Hits.Add(new SearchHit(
                             page.PageNumber,
                             m.Value,
                             page.GetLine(m.Index),
                             page.GetLineNumber(m.Index),
                             page.NumberOfLines));
                     }
+                    yield return result;
                 }
             }
         }

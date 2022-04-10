@@ -34,7 +34,7 @@
                 <DataGridTextColumn Binding="{Binding Path=DirectoryPath, Mode=OneWay}"
                     CanUserReorder="True" CanUserResize="True" IsReadOnly="False"
                     CanUserSort="True" Header="ディレクトリパス" Width="*" />
-                <DataGridTemplateColumn IsReadOnly="False" Header="ページ指定（!）" >
+                <DataGridTemplateColumn IsReadOnly="False" Header="ページ指定（i）" >
                     <DataGridTemplateColumn.HeaderStyle>
                       <Style TargetType="DataGridColumnHeader">
                         <Setter Property="ToolTip"
@@ -62,9 +62,17 @@
                   VerticalGridLinesBrush="LightGray"
                   HorizontalGridLinesBrush="LightGray">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Word, Mode=TwoWay}"
+                <DataGridTextColumn Binding="{Binding Keyword, Mode=TwoWay}"
                     CanUserReorder="True" CanUserResize="True" IsReadOnly="False"
                     CanUserSort="True" Header="抽出キーワード" Width="*" />
+                <DataGridTemplateColumn IsReadOnly="False" Header="正規表現">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding EnableRegexp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         <CheckBox Grid.Row="3" Name="chekBoxMergePdf" Content="PDFをひとつのファイルにまとめる." Margin="5,5,0,0" IsChecked="{Binding MergePdf}"/>
