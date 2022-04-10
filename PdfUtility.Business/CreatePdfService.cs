@@ -123,11 +123,10 @@ namespace PdfUtility.Business
                 var outPath = Path.ChangeExtension(target.CurrentPath, ".keyword");
                 var searchTarget = keywords.Select(k => new SearchTarget(k, false, true)).ToList();
                 new SearchPdfService().Search(searchTarget, target.CurrentPath);
+                var extractPages = searchTarget.SelectMany(t => t.Hits.Select(h => h.Page)).Distinct().ToList();
+                extractPages.Sort();
 
-                pdfService.ExtractPages(
-                    searchTarget.SelectMany(t => t.Hits.Select(h => h.Page)).Distinct().ToList(),
-                    target.CurrentPath,
-                    outPath);
+                pdfService.ExtractPages(extractPages, target.CurrentPath, outPath);
                 target.CurrentPath = outPath;
             }
             return target;
