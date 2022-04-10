@@ -51,7 +51,7 @@ namespace PdfUtility.Plugins
             {
                 try
                 {
-                    var createPdfService = new CreatePdfService(tempDirectoryPath);
+                    var createPdfService = new CreatePdfService(tempDirectoryPath, (x) => host.Log(x));
                     var srcFiles = CollectionViewSource.GetDefaultView(FilePaths).Cast<TargetPath>();
                     var keywords = Keywords.Where(x => !string.IsNullOrEmpty(x.Keyword)).Select(x => new SearchTarget(x.Keyword, x.EnableRegexp, true)).ToList();
                     if (MergePdf && string.IsNullOrEmpty(MergedPdfName))

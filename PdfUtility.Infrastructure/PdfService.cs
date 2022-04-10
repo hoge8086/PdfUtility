@@ -19,6 +19,8 @@ namespace PdfUtility.Infrastructure
 
             try
             {
+                if (srcPdfPathList.Count < 1)
+                    throw new ArgumentException("結合するPDFファイルがありません.");
 
                 objITextDoc = new Document();
                 objPDFCopy = new PdfCopy(objITextDoc, new FileStream(destPdfPath, FileMode.Create));

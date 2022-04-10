@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,10 +21,29 @@ namespace PdfUtility.Tools
     public partial class MainWindow : Window
     {
         PluginManager pluginManager;
+
+        public class Log
+        {
+            public DateTime DateTime { get; } = DateTime.Now;
+            public string Content { get; }
+            public Log(string content)
+            {
+                Content = content;
+            }
+        }
+
+        public ObservableCollection<Log> LogList { get; } = new ObservableCollection<Log>();
         public MainWindow()
         {
             InitializeComponent();
-            pluginManager = new PluginManager();
+
+            DataContext = LogList;
+            pluginManager = new PluginManager((m) => {
+                Dispatcher.Invoke(() =>
+                {
+                    LogList.Add(new Log(m));
+                });
+            });
             var jsonRepo = new JsonRepository<PluginConfig>(@".\plugin_config.json");
             var config = jsonRepo.Load();
             pluginManager.LoadPlugins();

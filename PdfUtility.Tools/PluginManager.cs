@@ -13,9 +13,12 @@ namespace PdfUtility.Tools
     {
         public List<PanelPlugin> Plugins;
 
-        public PluginManager()
+        public Action<string> LogFunc;
+
+        public PluginManager(Action<string> log)
         {
             Plugins = new List<PanelPlugin>();
+            LogFunc = log;
         }
 
         string IPluginHost.GetCurrentDirectory()
@@ -65,6 +68,10 @@ namespace PdfUtility.Tools
             }
         }
 
+        public void Log(string message)
+        {
+            LogFunc?.Invoke(message);
+        }
     }
 
     public class PanelPlugin

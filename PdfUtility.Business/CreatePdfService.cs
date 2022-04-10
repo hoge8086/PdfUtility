@@ -42,10 +42,12 @@ namespace PdfUtility.Business
         private static readonly string PdfExtension = ".pdf";
         private TempDirectory tempDir;
         private PdfService pdfService;
-        public CreatePdfService(string tempDirPath)
+        private Action<string> LogService;
+        public CreatePdfService(string tempDirPath, Action<string> logService = null)
         {
             tempDir = new TempDirectory(tempDirPath);
             pdfService = new PdfService();
+            LogService = logService;
         }
         public void CreatePdf(List<CreatePdfTarget> createTargets, List<SearchTarget> keywords, string OutputDirectory,  string MargeFileName)
         {
@@ -61,8 +63,8 @@ namespace PdfUtility.Business
                 var createdPdfList = createTargets.Select(x => new ProessingFile(x))
                     .Select(x => CopyToTempDir(x))
                     .Select(x => ConvertToPdf(x))
-                    .Select(x => ExtractPageByPageNumbers(x))
-                    .Select(x => ExtractPageByPageKeywords(x, keywords));
+                    .Select(x => ExtractPageByPageNumbers(x)).Where(x => x != null)
+                    .Select(x => ExtractPageByPageKeywords(x, keywords)).Where(x => x != null);
 
                 if (MargeFileName == null)
                     MoveToOutputDirectory(OutputDirectory, createdPdfList);
@@ -111,6 +113,11 @@ namespace PdfUtility.Business
                 var pageNum = pdfService.GetPages(file.CurrentPath).NumberOfPages;
                 var extractPages = file.Target.ExtractPageNumbers.SelectMany(x => x.GetNumberList(pageNum)).Distinct().ToList();
                 extractPages.Sort();
+                if(extractPages.Count == 0)
+                {
+                    LogService?.Invoke($"{Path.GetFileName(file.Target.Path)}にはページが存在しないためスキップします.");
+                    return null;
+                }
                 pdfService.ExtractPages(extractPages, file.CurrentPath, outPath);
                 file.CurrentPath = outPath;
             }
@@ -124,6 +131,11 @@ namespace PdfUtility.Business
                 var results =new SearchPdfService().Search(keywords, target.CurrentPath);
                 var extractPages = results.SelectMany(t => t.Hits.Select(h => h.Page)).Distinct().ToList();
                 extractPages.Sort();
+                if(extractPages.Count == 0)
+                {
+                    LogService?.Invoke($"{Path.GetFileName(target.Target.Path)}にはキーワードが存在しないためスキップします.");
+                    return null;
+                }
 
                 pdfService.ExtractPages(extractPages, target.CurrentPath, outPath);
                 target.CurrentPath = outPath;

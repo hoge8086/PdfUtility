@@ -12,6 +12,7 @@ namespace PanelPluginInterface
         void SaveSetting(object setting);
         void LoadSetting(Type type, object setting);
         string GetCurrentDirectory();
+        void Log(string message);
 
     }
     public interface IPanelPlugin

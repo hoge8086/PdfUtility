@@ -5,7 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PdfUtility.Tools"
         mc:Ignorable="d"
-        Title="PDF便利ツール" Height="400" Width="525">
-    <TabControl x:Name="pluginsTabControl">
-    </TabControl>
+        Title="PDF便利ツール" Height="500" Width="525">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TabControl Grid.Row="0" x:Name="pluginsTabControl">
+        </TabControl>
+        <DataGrid Grid.Row="1" AutoGenerateColumns="False"
+                  Height="80"
+                  VerticalGridLinesBrush="LightGray"
+                  HorizontalGridLinesBrush="LightGray"
+                  ItemsSource="{Binding .}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding DateTime, ConverterCulture=ja-JP, Mode=OneTime}"
+                    CanUserReorder="False" CanUserResize="True" IsReadOnly="True"
+                    CanUserSort="True" Header="日時" Width="Auto" />
+                <DataGridTextColumn Binding="{Binding Content, Mode=OneTime}"
+                    CanUserReorder="False" CanUserResize="True" IsReadOnly="True"
+                    CanUserSort="True" Header="ログ" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
 </Window>
