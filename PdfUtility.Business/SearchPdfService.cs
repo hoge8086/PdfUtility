@@ -102,8 +102,8 @@ namespace PdfUtility.Business
                             page.GetLineNumber(m.Index),
                             page.NumberOfLines));
                     }
-                    yield return result;
                 }
+                yield return result;
             }
         }
     }

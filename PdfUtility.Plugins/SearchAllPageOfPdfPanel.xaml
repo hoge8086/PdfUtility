@@ -33,7 +33,7 @@
                 </Grid>
             </DockPanel>
             <Button Content="検索実行" Margin="5,5,5,0" Command="{Binding SearchCommand}"/>
-            <TextBlock Text="結果  （!）ダブルクリックで該当ページを開きます" Margin="5,5,0,0"/>
+            <TextBlock Text="結果  （i）ダブルクリックで該当ページを開きます" Margin="5,5,0,0"/>
         </StackPanel>
         <DataGrid Grid.Row="2"  AutoGenerateColumns="False" Margin="5,5,5,0"
                   CanUserAddRows="False"
